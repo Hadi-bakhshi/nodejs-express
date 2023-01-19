@@ -2,3 +2,7 @@
 
 # text files
 .txt
+/build
+
+production.env
+development.env
