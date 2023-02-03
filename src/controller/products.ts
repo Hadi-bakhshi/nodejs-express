@@ -1,10 +1,5 @@
 import type { Request, Response } from 'express';
-
-interface IProducts {
-  title: string;
-}
-
-const products: IProducts[] = [];
+import { Product } from '@src/models/product';
 
 const getAddProduct = (req: Request, res: Response) => {
   res.render('add-product', {
@@ -18,11 +13,14 @@ const getAddProduct = (req: Request, res: Response) => {
 
 const postAddProduct = (req: Request, res: Response) => {
   const { title }: { title: string } = req.body;
-  products.push({ title });
+  // products.push({ title });
+  const product = new Product(title);
+  product.save();
   res.redirect('/');
 };
 
 const getProducts = (req: Request, res: Response) => {
+  const products = Product.fetchAll();
   res.render('shop', {
     prods: products,
     pageTitle: 'Shop',
