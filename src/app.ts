@@ -21,5 +21,5 @@ app.use(shopRouter);
 app.use(errorController.get404);
 
 app.listen(port, () => {
-  console.log(`App started on port ${port} 🚀`);
+  console.log(`App started on port http://localhost:${port} 🚀`);
 });

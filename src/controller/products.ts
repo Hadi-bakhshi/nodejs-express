@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import { Product } from '@src/models/product';
+import { IProducts, Product } from '@src/models/product';
 
 const getAddProduct = (req: Request, res: Response) => {
   res.render('add-product', {
@@ -20,14 +20,15 @@ const postAddProduct = (req: Request, res: Response) => {
 };
 
 const getProducts = (req: Request, res: Response) => {
-  const products = Product.fetchAll();
-  res.render('shop', {
-    prods: products,
-    pageTitle: 'Shop',
-    path: '/',
-    hasProducts: products.length > 0,
-    activeShop: true,
-    productCSS: true,
+  Product.fetchAll((products: IProducts[]) => {
+    res.render('shop', {
+      prods: products,
+      pageTitle: 'Shop',
+      path: '/',
+      hasProducts: products.length > 0,
+      activeShop: true,
+      productCSS: true,
+    });
   });
 };
 
