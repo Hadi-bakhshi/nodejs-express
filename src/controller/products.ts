@@ -2,7 +2,7 @@ import type { Request, Response } from 'express';
 import { IProducts, Product } from '@src/models/product';
 
 const getAddProduct = (req: Request, res: Response) => {
-  res.render('add-product', {
+  res.render('admin/add-product', {
     pageTitle: 'Add Product',
     path: '/admin/add-product',
     formsCSS: true,
@@ -21,7 +21,7 @@ const postAddProduct = (req: Request, res: Response) => {
 
 const getProducts = (req: Request, res: Response) => {
   Product.fetchAll((products: IProducts[]) => {
-    res.render('shop', {
+    res.render('shop/product-list', {
       prods: products,
       pageTitle: 'Shop',
       path: '/',
