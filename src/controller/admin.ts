@@ -1,14 +1,15 @@
 import type { Request, Response } from 'express';
 import { IProducts, Product } from '@src/models/product';
+import type { Shop } from './types';
 
 const getAddProduct = (req: Request, res: Response) => {
   res.render('admin/add-product', {
     pageTitle: 'Add Product',
     path: '/admin/add-product',
-    formsCSS: true,
-    productCSS: true,
-    activeAddProduct: true,
-  });
+    // formsCSS: true,
+    // productCSS: true,
+    // activeAddProduct: true,
+  } as Omit<Shop, 'prods'>);
 };
 const postAddProduct = (req: Request, res: Response) => {
   const { title }: { title: string } = req.body;
@@ -24,10 +25,7 @@ const adminProducts = (req: Request, res: Response) => {
       prods: products,
       pageTitle: 'Admin Products',
       path: '/admin/products',
-      hasProducts: products.length > 0,
-      activeShop: true,
-      productCSS: true,
-    });
+    } as Shop);
   });
 };
 

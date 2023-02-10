@@ -1,11 +1,7 @@
 import type { Request, Response } from 'express';
 import { IProducts, Product } from '@src/models/product';
+import type { Shop } from './types';
 
-type Shop = {
-  prods: IProducts[];
-  pageTitle: string;
-  path: string;
-};
 // hint: some commented parts are for HBS
 
 const getProducts = (req: Request, res: Response) => {
