@@ -12,9 +12,9 @@ const getAddProduct = (req: Request, res: Response) => {
   } as Omit<Shop, 'prods'>);
 };
 const postAddProduct = (req: Request, res: Response) => {
-  const { title }: { title: string } = req.body;
+  const { title, imageUrl, description, price }: { title: string; imageUrl: string; description: string; price: string | number } = req.body;
   // products.push({ title });
-  const product = new Product(title);
+  const product = new Product(title, imageUrl, description, price);
   product.save();
   res.redirect('/');
 };

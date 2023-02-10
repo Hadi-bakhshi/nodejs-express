@@ -2,6 +2,9 @@ import { readFile, writeFile } from 'fs';
 import path from 'path';
 export interface IProducts {
   title: string;
+  imageUrl: string;
+  description: string;
+  price: string | number;
 }
 // path of the json file to read and write the data in it
 const p = path.join(path.dirname(require?.main?.filename as string), 'data', 'products.json');
@@ -21,9 +24,15 @@ const getProductsFromFile = <T>(callback: (products: T[]) => T[] | void) => {
 // Products model class
 export class Product {
   title: string;
+  imageUrl: string;
+  description: string;
+  price: string | number;
   static products: IProducts[];
-  constructor(t: string) {
-    this.title = t;
+  constructor(title: string, imageUrl: string, description: string, price: string | number) {
+    this.title = title;
+    this.imageUrl = imageUrl;
+    this.description = description;
+    this.price = price;
   }
 
   public save() {
