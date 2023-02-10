@@ -1,8 +1,11 @@
 import { Router } from 'express';
-import productsController from '../controller/products';
+import shopController from '../controller/shop';
 
 const shopRouter = Router();
 
-shopRouter.get('/', productsController.getProducts);
+shopRouter.get('/', shopController.getIndex);
+shopRouter.get('/products', shopController.getProducts);
+shopRouter.get('/cart');
+shopRouter.get('/checkout');
 
 export default shopRouter;
