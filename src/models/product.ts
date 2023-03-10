@@ -1,6 +1,7 @@
 import { readFile, writeFile } from 'fs';
 import path from 'path';
 export interface IProducts {
+  id?: string | number;
   title: string;
   imageUrl: string;
   description: string;
@@ -23,6 +24,7 @@ const getProductsFromFile = <T>(callback: (products: T[]) => T[] | void) => {
 
 // Products model class
 export class Product {
+  id?: string | number;
   title: string;
   imageUrl: string;
   description: string;
@@ -36,6 +38,7 @@ export class Product {
   }
 
   public save() {
+    this.id = Math.round(Math.random() * 99).toString();
     getProductsFromFile((products: IProducts[]) => {
       products.push(this);
       writeFile(p, JSON.stringify(products), (err) => {
@@ -48,5 +51,13 @@ export class Product {
 
   static fetchAll(cb: (products: IProducts[]) => any) {
     getProductsFromFile(cb);
+  }
+  static findById(id: string | number, cb: (products: IProducts) => any) {
+    getProductsFromFile((products: IProducts[]) => {
+      const product = products.find((item) => item?.id === id);
+      if (product) {
+        cb(product);
+      }
+    });
   }
 }

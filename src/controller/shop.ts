@@ -43,10 +43,24 @@ const getCheckout = (req: Request, res: Response) => {
     pageTitle: 'Checkout',
   } as Omit<Shop, 'prods'>);
 };
-
+const getOrders = (req: Request, res: Response) => {
+  res.render('shop/orders', {
+    path: '/orders',
+    pageTitle: 'Orders',
+  } as Omit<Shop, 'prods'>);
+};
+const getProduct = (req: Request, res: Response) => {
+  const productId = req.params.productId;
+  Product.findById(productId, (product) => {
+    console.log(product);
+  });
+  res.redirect('/');
+};
 export default {
+  getProduct,
   getProducts,
   getIndex,
   getCart,
   getCheckout,
+  getOrders,
 } as const;
